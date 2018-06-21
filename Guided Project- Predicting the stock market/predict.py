@@ -10,12 +10,12 @@ df_ordered.set_index(['index'])
 
 
 df_ordered['date_after_april1_2015'] = df_ordered.DateTime > datetime(year=2015, month=4, day=1)
-data_mean_5day = pd.rolling_mean(df_ordered.Close, window=5).shift(1)
-data_mean_365day = pd.rolling_mean(df_ordered.Close, window=365).shift(1)
+data_mean_5day = df_ordered.Close.rolling(5).mean().shift(1)
+data_mean_365day = df_ordered.Close.rolling(365).mean().shift(1)
 data_mean_ratio = data_mean_5day/data_mean_365day
 
-data_std_5day = pd.rolling_std(df_ordered.Close, window=5).shift(1)
-data_std_365day = pd.rolling_std(df_ordered.Close, window=365).shift(1)
+data_std_5day = df_ordered.Close.rolling(5).std().shift(1)
+data_std_365day = df_ordered.Close.rolling(365).std().shift(1)
 data_std_ratio = data_std_5day/data_std_365day
 
 df_ordered['data_mean_5day'] = data_mean_5day
